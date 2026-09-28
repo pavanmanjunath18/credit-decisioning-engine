@@ -341,14 +341,17 @@
     $("pd-cutoff-label").textContent = `cutoff ${pct(cutoff)}`;
     $("decline-share").textContent = pct(1 - K.chosen_policy.approval_rate, 0);
 
+    // Round the percentile down: the riskiest applicant is riskier than 99.6% of others, not "100%".
+    const riskierThan = (p) => Math.floor(p * 100) + "%";
+
     function show(i) {
       const a = A[i];
       $("risk").value = i;
-      $("risk-out").textContent = `riskier than ${pct(a.percentile, 0)} of 2015 applicants`;
+      $("risk-out").textContent = `riskier than ${riskierThan(a.percentile)} of 2015 applicants`;
       const v = $("verdict");
       v.textContent = a.approved ? "Approved" : "Declined";
       v.className = "verdict " + (a.approved ? "approved" : "declined");
-      $("verdict-sub").innerHTML = `Probability of default <strong>${pct(a.pd)}</strong> · riskier than ${pct(a.percentile, 0)} of 2015 applicants`;
+      $("verdict-sub").innerHTML = `Probability of default <strong>${pct(a.pd)}</strong> · riskier than ${riskierThan(a.percentile)} of 2015 applicants`;
       const w = Math.min(a.pd / MAX, 1) * 100;
       $("pd-fill").style.width = w + "%";
       $("pd-marker").style.left = w + "%";
