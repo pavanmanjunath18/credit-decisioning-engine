@@ -1,0 +1,12 @@
+# Python 3.13. Pinned to the versions every reported number was produced with.
+# The static site (site/) needs none of these: it is plain HTML/CSS/JS reading JSON.
+pandas==3.0.6
+numpy==2.5.3
+pyarrow==25.0.1
+duckdb==1.5.5
+scikit-learn==1.9.1
+scipy==1.18.1
+xgboost==3.4.1
+joblib==1.6.0
+matplotlib==3.11.2
+pytest==9.1.1

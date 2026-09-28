@@ -1,0 +1,6 @@
+id,pd,reason_1,reason_2,reason_3
+67398109,0.58764875,Loan amount too high relative to income,Employment length not provided,Income too low
+38417769,0.5867534,Loan purpose (small business),Loan amount too high relative to income,Too many open credit accounts
+67456123,0.57872075,Loan purpose (small business),Limited use of revolving credit,Employment length not provided
+46814737,0.5781486,Loan purpose (small business),Limited use of revolving credit,Too many open credit accounts
+65864927,0.57782876,Loan purpose (small business),Limited use of revolving credit,Income too low

@@ -1,0 +1,7 @@
+features,category_handling,n_trees,valid_roc_auc
+without LC,native partition (default),367,0.6616214015870217
+without LC,one-vs-rest,438,0.6646469798260367
+without LC,drop addr_state,300,0.6627299923038774
+with LC,native partition (default),203,0.6778575730947728
+with LC,one-vs-rest,346,0.6803607426960783
+with LC,drop addr_state,270,0.6790180797494798

@@ -1,0 +1,5 @@
+features,category_handling,n_trees,valid_roc_auc
+without LC,native partition (default),300,0.6627299923038774
+without LC,one-vs-rest,375,0.6623711871177824
+with LC,native partition (default),270,0.6790180797494798
+with LC,one-vs-rest,324,0.6795882048424441

@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Which loans should a lender approve? | Credit decisioning on LendingClub data</title>
+  <meta name="description" content="A credit decisioning engine on 618,584 LendingClub loans: approve/decline decisions measured in profit, losses, and fairness, tested on 2015 loans the model never saw.">
+  <meta property="og:title" content="Which loans should a lender approve?">
+  <meta property="og:description" content="Approve/decline decisions on 618,584 LendingClub loans, measured in dollars, fairness, and drift.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231f47a8'/%3E%3Cpath d='M8 22 L14 14 L18 18 L24 10' stroke='white' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav class="topnav" aria-label="Sections">
+    <div class="topnav-inner">
+      <a class="brand" href="#overview">Credit decisioning</a>
+      <div class="navlinks">
+        <a href="#strategy">Strategy</a>
+        <a href="#vintages">Vintages</a>
+        <a href="#applicants">Applicants</a>
+        <a href="#fairness">Fairness</a>
+        <a href="#method">Method</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- 1. Overview -->
+    <header id="overview" class="section hero">
+      <p class="eyebrow">LendingClub consumer loans · <span data-k="n_loans"></span> loans · 2007–2015</p>
+      <h1>Which loans should a lender approve?</h1>
+      <p class="dek">
+        A credit decisioning engine that decides approve or decline, then measures what that decision does to
+        profit, losses, and fairness. The model learned from 2007–2013, every cutoff was chosen on 2014, and
+        every result below is on <strong>2015 loans it never saw</strong>, using what each borrower actually repaid.
+      </p>
+
+      <div class="headline-numbers">
+        <div class="hn">
+          <div class="hn-value accent" data-k="hindsight_gain_4_pct"></div>
+          <div class="hn-label">more profit than approving everyone, from declining the riskiest <span data-k="hindsight_decline_pct"></span> (4% cost of funds)</div>
+        </div>
+        <div class="hn">
+          <div class="hn-value accent" data-k="model_vs_subgrade_84_m"></div>
+          <div class="hn-label">more profit than ranking applicants by LendingClub’s own grade, at the same approval rate</div>
+        </div>
+        <div class="hn">
+          <div class="hn-value" data-k="auc_model"></div>
+          <div class="hn-label">ROC-AUC on the 2015 test set, vs <span data-k="auc_subgrade"></span> for LendingClub’s grade alone</div>
+        </div>
+      </div>
+
+      <h2 class="findings-title">What the data says</h2>
+      <ol class="findings" id="findings"></ol>
+    </header>
+
+    <!-- 2. Approval strategy -->
+    <section id="strategy" class="section">
+      <p class="eyebrow">Approval strategy</p>
+      <h2 class="finding" id="strategy-headline"></h2>
+
+      <div class="controls">
+        <div class="control">
+          <label for="rate">Approve the safest <output id="rate-out"></output> of applicants</label>
+          <input type="range" id="rate" min="50" max="100" step="1" value="88">
+        </div>
+        <div class="control">
+          <label for="cof">Cost of funds <output id="cof-out"></output> <span class="assume">assumption, default 4%</span></label>
+          <input type="range" id="cof" min="0" max="8" step="0.5" value="4">
+        </div>
+        <div class="control segmented" role="radiogroup" aria-label="Rank applicants by">
+          <span class="seg-label">Rank applicants by</span>
+          <div class="seg" id="ranking"></div>
+        </div>
+      </div>
+
+      <div class="readout" id="readout"></div>
+
+      <figure class="chart">
+        <figcaption>Total net profit on 2015 loans by approval rate</figcaption>
+        <div class="line-key" id="profit-key" aria-hidden="true"></div>
+        <div class="chart-box tall"><canvas id="profit-chart" aria-label="Profit by approval rate"></canvas></div>
+      </figure>
+
+      <div class="table-wrap">
+        <table class="policy" id="policy-table">
+          <thead><tr><th>Policy</th><th>Approved</th><th class="hide-sm">Default rate</th><th class="hide-sm">Dollar loss</th><th>Profit</th><th>vs approve all</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p class="table-note">The chosen policy is the approval rate that maximized 2014 profit, applied unchanged to 2015. The hindsight row is a yardstick: it uses 2015 outcomes, so no lender could have picked it.</p>
+
+      <div class="meaning">
+        <h3>What this means</h3>
+        <p id="strategy-meaning"></p>
+      </div>
+    </section>
+
+    <!-- 3. Vintages -->
+    <section id="vintages" class="section">
+      <p class="eyebrow">Vintage curves</p>
+      <h2 class="finding" id="vintage-headline"></h2>
+      <figure class="chart">
+        <figcaption>Share of each year’s 36-month loans charged off, by months since issue. Dashed lines are vintages that hadn’t finished when the data ends.</figcaption>
+        <div class="chart-box tall"><canvas id="vintage-chart" aria-label="Cumulative default rate by vintage"></canvas></div>
+      </figure>
+      <div class="meaning">
+        <h3>What this means</h3>
+        <p id="vintage-meaning"></p>
+      </div>
+    </section>
+
+    <!-- 4. Applicant explorer -->
+    <section id="applicants" class="section">
+      <p class="eyebrow">Applicant explorer</p>
+      <h2 class="finding">Every decision comes with a probability of default and three plain-English reasons.</h2>
+
+      <div class="picker">
+        <label for="risk">Pick by risk: <output id="risk-out"></output></label>
+        <input type="range" id="risk" min="0" max="299" step="1" value="150">
+        <div class="picker-buttons">
+          <button type="button" id="btn-random">Random applicant</button>
+          <button type="button" id="btn-declined">Show a declined applicant</button>
+        </div>
+      </div>
+
+      <article class="applicant" id="applicant" aria-live="polite">
+        <div class="verdict-row">
+          <div class="verdict" id="verdict"></div>
+          <div class="verdict-sub" id="verdict-sub"></div>
+        </div>
+
+        <div class="pd-scale" aria-hidden="true">
+          <div class="pd-track">
+            <div class="pd-fill" id="pd-fill"></div>
+            <div class="pd-cutoff" id="pd-cutoff"><span id="pd-cutoff-label"></span></div>
+            <div class="pd-marker" id="pd-marker"></div>
+          </div>
+          <div class="pd-axis"><span>0%</span><span>20%</span><span>40%</span><span>60%</span></div>
+        </div>
+
+        <div class="applicant-grid">
+          <div>
+            <h3 id="reasons-title"></h3>
+            <ol class="reasons" id="reasons"></ol>
+          </div>
+          <div>
+            <h3>Application</h3>
+            <dl class="facts" id="facts"></dl>
+          </div>
+        </div>
+        <p class="outcome" id="outcome"></p>
+      </article>
+      <p class="table-note"><strong>Declines are over-sampled for illustration. The chosen policy declines about <span id="decline-share"></span> of applicants.</strong> 300 real 2015 applicants: 250 spread evenly across the risk range, plus 50 from above the cutoff. Reasons are the features that raised this applicant’s risk most (SHAP values). LendingClub’s own grade and rate are never given as reasons.</p>
+    </section>
+
+    <!-- 5. Fairness & monitoring -->
+    <section id="fairness" class="section">
+      <p class="eyebrow">Fairness</p>
+      <h2 class="finding" id="fair-headline"></h2>
+
+      <div class="seg-row">
+        <span class="seg-label">Operating point</span>
+        <div class="seg" id="fair-op"></div>
+      </div>
+
+      <figure class="chart">
+        <figcaption>Approval rate relative to the best income band (1.00 = same rate). Below 0.80 fails the four-fifths screen.</figcaption>
+        <div class="chart-box short"><canvas id="fair-income-chart" aria-label="Approval ratio by income band"></canvas></div>
+      </figure>
+
+      <figure class="chart">
+        <figcaption>Among approved applicants: default rate the model predicted vs what actually happened, by income band</figcaption>
+        <div class="chart-box short"><canvas id="fair-calib-chart" aria-label="Predicted vs actual default by income"></canvas></div>
+      </figure>
+
+      <p class="side-facts" id="fair-side"></p>
+
+      <div class="meaning">
+        <h3>What this means</h3>
+        <p id="fair-meaning"></p>
+        <p class="limitation"><strong>Limitation.</strong> The data has no protected attributes (race, sex, age), and none were inferred. Income, home ownership and state are not protected classes. The four-fifths screen is a first check for groups that may overlap with protected classes. It is not a finding of discrimination, and it doesn’t replace a proper fair-lending review.</p>
+      </div>
+
+      <p class="eyebrow monitor-eyebrow">Monitoring</p>
+      <h2 class="finding" id="psi-headline"></h2>
+      <figure class="chart">
+        <figcaption>Population stability index vs 2007–2013 training loans, model score and top features. Above 0.10 is a moderate shift; above 0.25 a major one.</figcaption>
+        <div class="chart-box tall psi"><canvas id="psi-chart" aria-label="Population stability index by feature"></canvas></div>
+      </figure>
+      <div class="meaning">
+        <h3>What this means</h3>
+        <p id="psi-meaning"></p>
+      </div>
+    </section>
+
+    <!-- 6. Method & limitations -->
+    <section id="method" class="section method">
+      <p class="eyebrow">Method &amp; limitations</p>
+      <h2 class="finding">Built to avoid the two classic traps in credit data: leakage and survivorship bias.</h2>
+      <div class="method-grid">
+        <div>
+          <h3>Data</h3>
+          <p id="method-data"></p>
+        </div>
+        <div>
+          <h3>Validation</h3>
+          <p>Split by time, not at random: train on 2007–2013, choose every setting and cutoff on 2014, report once on 2015. Model inputs are application-time fields only. Automated tests keep outcome columns and geography out of every model, and LendingClub’s price out of the borrower-only model.</p>
+        </div>
+        <div>
+          <h3>Models</h3>
+          <p id="method-models"></p>
+        </div>
+        <div>
+          <h3>Profit</h3>
+          <p>Net profit = total payments received (including recoveries) − collection fees − funded amount, from actual outcomes. Cost of funds = rate × average outstanding balance × years outstanding. The rate is an assumption.</p>
+        </div>
+      </div>
+      <h3>Limitations</h3>
+      <ul class="limits">
+        <li>Only loans LendingClub accepted: there are no outcomes for rejected applicants, so the analysis can tighten LendingClub’s policy but not loosen it.</li>
+        <li>Profit excludes servicing and acquisition costs and uses a straight-line average balance.</li>
+        <li id="limit-calib"></li>
+        <li>No protected attributes, so fairness is a first screen only.</li>
+      </ul>
+      <p class="links">
+        <a href="https://github.com/pavanmanjunath18/credit-decisioning-engine">Code on GitHub</a>
+        <a href="https://github.com/pavanmanjunath18/credit-decisioning-engine#readme">README</a>
+      </p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Data: LendingClub accepted loans 2007–2018Q4, via Kaggle (wordsforthewise/lending-club). Every number on this page is generated by the project’s pipeline and checked by automated tests.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

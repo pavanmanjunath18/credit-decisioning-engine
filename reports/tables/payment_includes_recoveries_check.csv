@@ -1,0 +1,3 @@
+loan_status,n_loans,n_with_recoveries,share_match_incl_recoveries,share_match_excl_recoveries,share_match_incl_when_recovery_gt0,share_match_excl_when_recovery_gt0
+Charged Off,268559,184684.0,1.0,0.3127,1.0,0.0005
+Fully Paid,1076751,0.0,1.0,1.0,,

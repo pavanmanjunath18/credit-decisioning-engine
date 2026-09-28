@@ -1,0 +1,29 @@
+# Raw LendingClub data: download from Kaggle, never commit
+data/raw/
+*.csv.gz
+accepted_2007_to_2018Q4.csv
+rejected_2007_to_2018Q4.csv
+
+# Intermediate data rebuilt by the pipeline (large)
+data/processed/
+
+# Python environment and caches
+.pyenv-credit/
+.venv/
+venv/
+env/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Local tooling and OS files
+.claude/
+.vercel/
+.DS_Store
+.ipynb_checkpoints/
+
+# Local working notes: never published
+docs/
+CLAUDE.md
+**/CLAUDE.md
+.impeccable/

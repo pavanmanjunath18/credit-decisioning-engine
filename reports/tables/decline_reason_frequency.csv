@@ -1,0 +1,75 @@
+reason,share_in_top3,share_as_top1,operating_point,n_declined
+Income too low,0.708230307311904,0.3419286471211586,policy chosen on 2014: approve 99%,2831
+Loan amount too high relative to income,0.3472271282232427,0.08830801836806781,policy chosen on 2014: approve 99%,2831
+Limited use of revolving credit,0.3235605793006005,0.15400918403391028,policy chosen on 2014: approve 99%,2831
+Employment length not provided,0.31967502649240553,0.09395973154362416,policy chosen on 2014: approve 99%,2831
+Too many credit inquiries in the last 6 months,0.24690921935711763,0.05545743553514659,policy chosen on 2014: approve 99%,2831
+Debt-to-income ratio too high,0.23949134581419992,0.020840692334864006,policy chosen on 2014: approve 99%,2831
+Credit score too low,0.22960084775697634,0.018014835747085834,policy chosen on 2014: approve 99%,2831
+Too many open credit accounts,0.18403391027905333,0.05157188272695161,policy chosen on 2014: approve 99%,2831
+Loan purpose (small business),0.1229247615683504,0.12257152949487814,policy chosen on 2014: approve 99%,2831
+High use of available revolving credit,0.07771105616389969,0.03355704697986577,policy chosen on 2014: approve 99%,2831
+Loan purpose (other),0.04945249028611798,0.00565171317555634,policy chosen on 2014: approve 99%,2831
+Limited length of credit history,0.03956199222889439,0.01095019427764041,policy chosen on 2014: approve 99%,2831
+Length of credit history,0.017661603673613566,0.0,policy chosen on 2014: approve 99%,2831
+Length of employment,0.016955139526669022,0.0010596962204168139,policy chosen on 2014: approve 99%,2831
+Loan purpose (home improvement),0.012363122571529495,0.00035323207347227127,policy chosen on 2014: approve 99%,2831
+High revolving credit balances,0.010596962204168139,0.00035323207347227127,policy chosen on 2014: approve 99%,2831
+Rents rather than owns home,0.009184033910279053,0.0,policy chosen on 2014: approve 99%,2831
+Limited number of credit accounts,0.008830801836806783,0.0,policy chosen on 2014: approve 99%,2831
+Requested loan amount too large,0.008124337689862239,0.0,policy chosen on 2014: approve 99%,2831
+No or few mortgage accounts,0.007064641469445425,0.0,policy chosen on 2014: approve 99%,2831
+Loan purpose (medical),0.006711409395973154,0.0007064641469445425,policy chosen on 2014: approve 99%,2831
+Loan purpose (moving),0.0031790886612504416,0.0007064641469445425,policy chosen on 2014: approve 99%,2831
+Income level,0.002472624514305899,0.0,policy chosen on 2014: approve 99%,2831
+Loan purpose (vacation),0.0021193924408336277,0.0,policy chosen on 2014: approve 99%,2831
+Income verification status (Source Verified),0.0017661603673613563,0.0,policy chosen on 2014: approve 99%,2831
+Short time with current employer,0.0010596962204168139,0.0,policy chosen on 2014: approve 99%,2831
+Too few open credit accounts,0.0007064641469445425,0.0,policy chosen on 2014: approve 99%,2831
+Bankruptcy on credit file,0.0007064641469445425,0.0,policy chosen on 2014: approve 99%,2831
+Loan purpose (house),0.0007064641469445425,0.0,policy chosen on 2014: approve 99%,2831
+Number of mortgage accounts,0.0007064641469445425,0.0,policy chosen on 2014: approve 99%,2831
+Revolving credit utilization,0.00035323207347227127,0.0,policy chosen on 2014: approve 99%,2831
+loan_to_income not available,0.00035323207347227127,0.0,policy chosen on 2014: approve 99%,2831
+Income too low,0.6375472564745787,0.39221990601703,stress test: approve 80%,56606
+Credit score too low,0.38630180546231846,0.054411193159735714,stress test: approve 80%,56606
+Debt-to-income ratio too high,0.3628943928205491,0.06430413737059676,stress test: approve 80%,56606
+Too many open credit accounts,0.26272833268558105,0.07697063915485991,stress test: approve 80%,56606
+Loan amount too high relative to income,0.21155001236618026,0.02752358407235982,stress test: approve 80%,56606
+Too many credit inquiries in the last 6 months,0.20759283468183584,0.0879235416740275,stress test: approve 80%,56606
+Limited use of revolving credit,0.1927534183655443,0.09705684909726885,stress test: approve 80%,56606
+Employment length not provided,0.16102533300356853,0.08564463131116842,stress test: approve 80%,56606
+High use of available revolving credit,0.0783132530120482,0.026392961876832845,stress test: approve 80%,56606
+Rents rather than owns home,0.0740027558916016,0.000812634703035014,stress test: approve 80%,56606
+Loan purpose (other),0.07133519414903014,0.017860297494965198,stress test: approve 80%,56606
+Limited number of credit accounts,0.06283786171077271,0.002561565911740805,stress test: approve 80%,56606
+Length of credit history,0.0478924495636505,0.003409532558386037,stress test: approve 80%,56606
+Limited length of credit history,0.03428965127371657,0.006236088047203476,stress test: approve 80%,56606
+Loan purpose (small business),0.03040313747659259,0.030367805532982368,stress test: approve 80%,56606
+Length of employment,0.028724870155107232,0.0028265554888174398,stress test: approve 80%,56606
+High revolving credit balances,0.025703988976433594,0.008974313676995372,stress test: approve 80%,56606
+Loan purpose (home improvement),0.023372080698159207,0.0027205596579867857,stress test: approve 80%,56606
+Income verification status (Source Verified),0.017330318340811928,0.00044164929512772495,stress test: approve 80%,56606
+Loan purpose (medical),0.01591704059640321,0.006324417906229022,stress test: approve 80%,56606
+Requested loan amount too large,0.015263399639614175,0.00035331943610217997,stress test: approve 80%,56606
+No or few mortgage accounts,0.01483941631629156,0.00031798749249196197,stress test: approve 80%,56606
+Loan purpose (moving),0.009239303254072007,0.0014486096880189378,stress test: approve 80%,56606
+Loan purpose (vacation),0.007843691481468396,0.0016429353778751369,stress test: approve 80%,56606
+Short time with current employer,0.005971098470126841,0.00028265554888174397,stress test: approve 80%,56606
+Requested loan amount,0.0031798749249196197,0.0,stress test: approve 80%,56606
+Loan purpose (house),0.003020881178673639,0.00015899374624598098,stress test: approve 80%,56606
+Number of mortgage accounts,0.002314242306469279,0.000300321520686853,stress test: approve 80%,56606
+Too few open credit accounts,0.001695933293290464,0.0,stress test: approve 80%,56606
+Income level,0.0015899374624598098,0.00044164929512772495,stress test: approve 80%,56606
+Revolving credit utilization,0.0011306221955269759,0.0,stress test: approve 80%,56606
+Bankruptcy on credit file,0.000688972900399251,7.066388722043599e-05,stress test: approve 80%,56606
+Loan purpose (debt consolidation),0.000335653464297071,0.0,stress test: approve 80%,56606
+Income not verified,0.000194325689856199,0.0,stress test: approve 80%,56606
+Loan amount relative to income,3.5331943610217996e-05,0.0,stress test: approve 80%,56606
+loan_to_income not available,3.5331943610217996e-05,0.0,stress test: approve 80%,56606
+Public record history,1.7665971805108998e-05,0.0,stress test: approve 80%,56606
+Low debt-to-income ratio,1.7665971805108998e-05,0.0,stress test: approve 80%,56606
+Loan purpose (major purchase),1.7665971805108998e-05,0.0,stress test: approve 80%,56606
+Revolving credit utilization not available,1.7665971805108998e-05,0.0,stress test: approve 80%,56606
+Delinquency history,1.7665971805108998e-05,0.0,stress test: approve 80%,56606
+Delinquencies in the last 2 years,1.7665971805108998e-05,0.0,stress test: approve 80%,56606
