@@ -3,6 +3,10 @@
 Which loans should a lender approve? An approve/decline engine on 618,584 LendingClub loans, measured in
 profit, losses, and fairness.
 
+**Live site: [credit-decisioning-engine-zeta.vercel.app](https://credit-decisioning-engine-zeta.vercel.app)**
+
+![Overview: which loans should a lender approve?](assets/screenshots/overview.png)
+
 ## About
 
 A personal portfolio project to build hands-on expertise in consumer credit risk and lending analytics, using
@@ -24,6 +28,20 @@ results are reported on 2015 loans the models never saw.
 - **Income is the fairness pressure point.** At an 80% approval stress test, applicants under $40K are
   approved at 0.53× the best income band's rate, and the model overstates their risk gap (4.7 points predicted
   vs 1.8 actual).
+
+## Screenshots
+
+**Approval strategy:** move the approval-rate and cost-of-funds sliders and see profit, losses, and the policy table update on 2015 loans.
+
+![Approval strategy with profit curve, sliders, and policy table](assets/screenshots/approval-strategy.png)
+
+**Applicant explorer:** each decision comes with a probability of default, three plain-English reasons, and what actually happened.
+
+![Applicant explorer showing a declined applicant and three decline reasons](assets/screenshots/applicant-explorer.png)
+
+**Fairness and monitoring:** approval rates and predicted vs actual default by income band, plus population-stability drift checks.
+
+![Fairness check: approval ratio and predicted vs actual default by income band](assets/screenshots/fairness-monitoring.png)
 
 ## Approach
 
